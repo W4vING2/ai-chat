@@ -18,7 +18,7 @@ interface IActions {
 interface Store extends IInitialState, IActions {}
 
 export const useMessageStore = create<Store>()(set => ({
-	model: 'gpt',
+	model: 'openai/gpt-5-mini',
 	messages: [
 		{
 			text: 'Привет! Я ваш помощник по программированию. Как я могу помочь вам сегодня?',

@@ -1,7 +1,7 @@
 import { ChatOllama } from '@langchain/ollama'
 
 const API_KEY =
-	'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'
+	'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'
 
 const chat = new ChatOllama({
 	model: 'qwen2.5-coder',
