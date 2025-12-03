@@ -1,5 +1,5 @@
-import ChatArea from '@/src/components/ui/ChatArea'
-import Sidebar from '@/src/components/ui/SideBar'
+import ChatArea from '@/src/components/ChatArea'
+import Sidebar from '@/src/components/SideBar'
 
 export default function Layout() {
 	return (

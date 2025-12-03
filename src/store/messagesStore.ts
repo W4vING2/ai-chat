@@ -3,6 +3,7 @@ import type { IMessage, Store } from './store.types'
 
 export const useMessageStore = create<Store>()(set => ({
 	model: 'openai/gpt-5-mini',
+	isLoading: false,
 	isBurgerOpen: false,
 	messages: [
 		{
@@ -22,4 +23,5 @@ export const useMessageStore = create<Store>()(set => ({
 		set(state => ({
 			isBurgerOpen: !state.isBurgerOpen,
 		})),
+	setIsLoading: (isLoading: boolean) => set({ isLoading }),
 }))

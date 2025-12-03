@@ -1,27 +1,23 @@
-import { API_KEY } from '../config/apiKey'
+import axios from 'axios'
+import { headers } from '../config/headers'
 
 export const fetchData = async (prompt: string, model: string) => {
 	if (prompt === '') return undefined
 
 	try {
-		const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-			method: 'POST',
-			headers: {
-				Authorization: `Bearer ${API_KEY}`,
-				'HTTP-Referer': 'http://localhost:3000/',
-				'X-Title': 'My App',
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
+		const res = await axios.post(
+			'https://openrouter.ai/api/v1/chat/completions',
+			{
 				max_tokens: 2000,
 				model,
 				messages: [{ role: 'user', content: prompt }],
-			}),
-		})
+			},
+			{
+				headers: headers,
+			}
+		)
 
-		const data = await res.json()
-
-		return data.choices[0].message.content
+		return res.data.choices[0].message.content
 	} catch (err) {
 		console.error(err)
 		return 'Ошибка запроса'
