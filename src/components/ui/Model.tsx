@@ -1,8 +1,9 @@
 import { useMessageStore } from '@/src/store/messagesStore'
 import type { ModelProps } from '@/src/types/model.types'
 import { setCurrentModel } from '@/src/utils/setCurrentModel'
+import { memo } from 'react'
 
-export default function Model({ idx, model, active, setActive }: ModelProps) {
+function Model({ idx, model, active, setActive }: ModelProps) {
 	const { setModel } = useMessageStore()
 	return (
 		<div
@@ -18,3 +19,5 @@ export default function Model({ idx, model, active, setActive }: ModelProps) {
 		</div>
 	)
 }
+
+export default memo(Model)

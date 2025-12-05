@@ -2,11 +2,11 @@
 
 import { models } from '@/src/config/models'
 import { useMessageStore } from '@/src/store/messagesStore'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import Logo from './ui/Logo'
 import Model from './ui/Model'
 
-export default function Sidebar() {
+function Sidebar() {
 	const [active, setActive] = useState(0)
 	const { isBurgerOpen } = useMessageStore()
 
@@ -34,3 +34,5 @@ export default function Sidebar() {
 		</aside>
 	)
 }
+
+export default memo(Sidebar)

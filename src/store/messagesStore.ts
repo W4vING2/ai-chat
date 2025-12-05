@@ -7,15 +7,17 @@ export const useMessageStore = create<Store>()(set => ({
 			role: 'assistant',
 			content:
 				'Привет! Я ваш помощник по программированию. Как я могу помочь вам сегодня?',
+			key: crypto.randomUUID(),
 		},
 	],
-	model: 'openai/gpt-5-mini',
+	model: 'openai/gpt-5.1-chat',
 	isLoading: false,
 	isBurgerOpen: false,
 	messages: [
 		{
 			text: 'Привет! Я ваш помощник по программированию. Как я могу помочь вам сегодня?',
 			sender: 'assistant',
+			key: crypto.randomUUID(),
 		},
 	],
 	addMessage: (message: IMessage) =>

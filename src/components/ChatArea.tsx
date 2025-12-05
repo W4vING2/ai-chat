@@ -12,7 +12,7 @@ export default function ChatArea() {
 			<div className='flex items-center gap-3 mb-4'>
 				<Logo primaryText='AI' secondaryText='Чат' />
 				<button
-					className='fixed w-[50px] h-[50px] top-5 right-5 z-90 p-3 bg-white/10 rounded-lg md:hidden'
+					className='absolute w-[50px] h-[50px] top-5 right-5 z-90 p-3 bg-white/10 rounded-lg md:hidden'
 					onClick={toggleBurger}
 				>
 					☰

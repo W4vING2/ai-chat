@@ -1,6 +1,7 @@
 import type { MessageProps } from '@/src/types/message.types'
+import { memo } from 'react'
 
-export default function Message({ sender, text, index }: MessageProps) {
+function Message({ sender, text, index }: MessageProps) {
 	return (
 		<div
 			className='bg-white/5 border border-white/10 p-3 rounded-xl max-w-[90%] overflow-wrap break-word text-white'
@@ -17,3 +18,5 @@ export default function Message({ sender, text, index }: MessageProps) {
 		</div>
 	)
 }
+
+export default memo(Message)

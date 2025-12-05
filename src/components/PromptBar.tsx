@@ -1,12 +1,14 @@
 'use client'
 
 import { useMessageStore } from '@/src/store/messagesStore'
+import type { ChatMessage } from '@/src/types/chatMessage.types'
 import { Data } from '@/src/types/promptBar.types'
-import { ChatMessage, fetchData } from '@/src/utils/fetchData'
+import { fetchData } from '@/src/utils/fetchData'
 import Image from 'next/image'
+import { memo } from 'react'
 import { useForm } from 'react-hook-form'
 
-export default function PromptBar() {
+function PromptBar() {
 	const { register, handleSubmit, reset } = useForm<Data>()
 	const {
 		addMessage,
@@ -20,7 +22,11 @@ export default function PromptBar() {
 	const onSubmit = async (data: Data) => {
 		if (!data.prompt) return
 		if (isLoading) return
-		const userPrompt: ChatMessage = { role: 'user', content: data.prompt }
+		const userPrompt: ChatMessage = {
+			role: 'user',
+			content: data.prompt,
+			key: crypto.randomUUID(),
+		}
 		const newArray = [...historyOfDialog, userPrompt]
 		setHistoryOfDialog(newArray)
 		setIsLoading(true)
@@ -28,17 +34,19 @@ export default function PromptBar() {
 		addMessage({
 			text: data.prompt,
 			sender: 'user',
+			key: crypto.randomUUID(),
 		})
 		try {
 			const response = await fetchData(model, newArray)
 			setHistoryOfDialog(prev => [
 				...prev,
-				{ role: 'assistant', content: response },
+				{ role: 'assistant', content: response, key: crypto.randomUUID() },
 			])
 			if (response === undefined) return
 			addMessage({
 				text: response,
 				sender: 'assistant',
+				key: crypto.randomUUID(),
 			})
 		} finally {
 			setIsLoading(false)
@@ -59,7 +67,7 @@ export default function PromptBar() {
 			/>
 			<button className='px-4 py-2 rounded-xl bg-linear-to-br from-purple-400 to-blue-400 text-[#041118] font-bold hover:opacity-90 transition-opacity hover:outline-white/20 flex items-center justify-center outline-white'>
 				{isLoading ? (
-					<span className='text-sm text-white'>Loading...</span>
+					<span className='text-[12px] text-white'>Loading...</span>
 				) : (
 					<Image
 						alt='submit button'
@@ -72,3 +80,5 @@ export default function PromptBar() {
 		</form>
 	)
 }
+
+export default memo(PromptBar)

@@ -3,11 +3,13 @@ export type ChatRole = 'user' | 'assistant' | 'system'
 export interface IChatMessage {
 	role: ChatRole
 	content: string
+	key: string
 }
 
 export interface IMessage {
 	text: string
 	sender: 'user' | 'assistant'
+	key: string
 }
 
 interface IInitialState {

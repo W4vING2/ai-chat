@@ -1,10 +1,6 @@
 import axios from 'axios'
 import { headers } from '../config/headers'
-
-export type ChatMessage = {
-	role: 'user' | 'assistant' | 'system'
-	content: string
-}
+import type { ChatMessage } from '../types/chatMessage.types'
 
 export const fetchData = async (
 	model: string,
