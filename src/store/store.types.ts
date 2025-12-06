@@ -18,6 +18,7 @@ interface IInitialState {
 	isBurgerOpen: boolean
 	isLoading: boolean
 	historyOfDialog: IChatMessage[]
+	isFirstSend: boolean
 }
 
 interface IActions {
@@ -28,6 +29,7 @@ interface IActions {
 	setHistoryOfDialog: (
 		updater: IChatMessage[] | ((prev: IChatMessage[]) => IChatMessage[])
 	) => void
+	setIsFirstSend: (isFirstSend: boolean) => void
 }
 
 export interface Store extends IInitialState, IActions {}

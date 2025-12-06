@@ -17,9 +17,12 @@ function PromptBar() {
 		setIsLoading,
 		historyOfDialog,
 		setHistoryOfDialog,
+		setIsFirstSend,
+		isFirstSend,
 	} = useMessageStore()
 
 	const onSubmit = async (data: Data) => {
+		setIsFirstSend(true)
 		if (!data.prompt) return
 		if (isLoading) return
 		const userPrompt: ChatMessage = {
@@ -56,12 +59,20 @@ function PromptBar() {
 	return (
 		<form
 			onSubmit={handleSubmit(onSubmit)}
-			className='flex gap-3 items-center bg-white/5 border border-white/8 rounded-xl p-3 mt-3'
+			className='flex gap-3 items-center bg-white/5 border border-white/8 rounded-xl p-3 mt-3 md:w-full w-[80%]'
+			style={{
+				marginBottom: isFirstSend ? '20px' : '100px',
+			}}
 		>
 			<input
 				className='flex-1 bg-transparent border-none outline-none text-white'
 				disabled={isLoading}
 				type='text'
+				autoComplete='off'
+				autoCorrect='off'
+				autoCapitalize='off'
+				spellCheck={false}
+				onPaste={e => e.preventDefault()}
 				placeholder='Напишите промпт…'
 				{...register('prompt')}
 			/>

@@ -12,13 +12,13 @@ function Sidebar() {
 
 	return (
 		<aside
-			className='glass bg-white/6 backdrop-blur-lg border border-white/12 rounded-2xl p-5 md:block fixed md:static top-0 left-0 h-full md:h-auto w-[260px] md:w-auto transition-left duration-300'
+			className='glass bg-white/6 backdrop-blur-lg border border-white/12 rounded-r-2xl rounded-l-none p-5 md:block fixed md:static top-0 left-0 h-full md:h-auto w-[260px] md:w-auto transition-left duration-300 z-5'
 			style={{
 				left: isBurgerOpen ? '0' : '-300px',
 			}}
 		>
 			<div className='flex items-center gap-3 mb-6'>
-				<Logo primaryText='LM' secondaryText='Выбор модели' />
+				<Logo text='выбор модели' />
 			</div>
 			<div className='flex flex-col gap-2'>
 				{models.map((model, idx) => (

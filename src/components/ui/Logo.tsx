@@ -1,15 +1,21 @@
+import logo from '@/src/app/icon.png'
 import type { LogoProps } from '@/src/types/logo.types'
+import Image from 'next/image'
 import { memo } from 'react'
 
-function Logo({ primaryText, secondaryText }: LogoProps) {
+function Logo({ text }: LogoProps) {
 	return (
 		<>
-			<div className='w-14 h-14 rounded-lg bg-linear-to-br from-blue-400 to-teal-400 flex items-center justify-center font-bold text-[#041118]'>
-				{primaryText}
-			</div>
+			<Image
+				src={logo}
+				alt='LiquidMind'
+				width={40}
+				height={40}
+				className='rounded-md'
+			/>
 			<div>
-				<div className='font-bold'>LiquidMind v1.6</div>
-				<div className='text-xs text-white/55'>{secondaryText}</div>
+				<div className='font-bold'>LiquidMind v1.7</div>
+				<div className='text-xs text-white/55'>{text}</div>
 			</div>
 		</>
 	)
