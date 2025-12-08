@@ -6,7 +6,7 @@ import { memo, useState } from 'react'
 import Logo from './ui/Logo'
 import Model from './ui/Model'
 
-function Sidebar() {
+function BurgerSide() {
 	const [active, setActive] = useState(0)
 	const { isBurgerOpen } = useMessageStore()
 
@@ -35,4 +35,4 @@ function Sidebar() {
 	)
 }
 
-export default memo(Sidebar)
+export default memo(BurgerSide)

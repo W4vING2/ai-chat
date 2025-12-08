@@ -3,6 +3,7 @@ import type { IMessage, Store } from './store.types'
 
 export const useMessageStore = create<Store>()(set => ({
 	historyOfDialog: [],
+	isChatHistoryOpen: false,
 	isFirstSend: false,
 	model: 'openai/gpt-5.1-chat',
 	isLoading: false,
@@ -29,4 +30,7 @@ export const useMessageStore = create<Store>()(set => ({
 					: updater,
 		})),
 	setIsFirstSend: (isFirstSend: boolean) => set({ isFirstSend }),
+	setIsChatHistoryOpen: (isChatHistoryOpen: boolean) =>
+		set({ isChatHistoryOpen }),
+	clearMessages: () => set({ messages: [] }),
 }))

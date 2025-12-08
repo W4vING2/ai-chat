@@ -19,6 +19,7 @@ interface IInitialState {
 	isLoading: boolean
 	historyOfDialog: IChatMessage[]
 	isFirstSend: boolean
+	isChatHistoryOpen: boolean
 }
 
 interface IActions {
@@ -30,6 +31,8 @@ interface IActions {
 		updater: IChatMessage[] | ((prev: IChatMessage[]) => IChatMessage[])
 	) => void
 	setIsFirstSend: (isFirstSend: boolean) => void
+	setIsChatHistoryOpen: (isChatHistoryOpen: boolean) => void
+	clearMessages: () => void
 }
 
 export interface Store extends IInitialState, IActions {}
