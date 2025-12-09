@@ -13,7 +13,7 @@ function ChatWindow() {
 	}, [messages, isLoading])
 
 	return (
-		<div className='flex-1 bg-transparentrounded-xl md:p-4 flex flex-col gap-4 overflow-y-auto w-[90%] md:w-[98%]'>
+		<div className='flex-1 bg-transparent rounded-xl md:p-4 flex flex-col gap-4 w-[90%] md:w-[98%] max-h-full overflow-y-scroll'>
 			{messages.map(message => (
 				<Message
 					key={message.key}

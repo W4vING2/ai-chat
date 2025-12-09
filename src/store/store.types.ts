@@ -1,10 +1,4 @@
-export type ChatRole = 'user' | 'assistant' | 'system'
-
-export interface IChatMessage {
-	role: ChatRole
-	content: string
-	key: string
-}
+import { ChatMessage } from '../types/chatMessage.types'
 
 export interface IMessage {
 	text: string
@@ -17,7 +11,7 @@ interface IInitialState {
 	model: string
 	isBurgerOpen: boolean
 	isLoading: boolean
-	historyOfDialog: IChatMessage[]
+	historyOfDialog: ChatMessage[]
 	isFirstSend: boolean
 	isChatHistoryOpen: boolean
 }
@@ -27,12 +21,12 @@ interface IActions {
 	setModel: (model: string) => void
 	toggleBurger: () => void
 	setIsLoading: (isLoading: boolean) => void
-	setHistoryOfDialog: (
-		updater: IChatMessage[] | ((prev: IChatMessage[]) => IChatMessage[])
-	) => void
 	setIsFirstSend: (isFirstSend: boolean) => void
 	setIsChatHistoryOpen: (isChatHistoryOpen: boolean) => void
 	clearMessages: () => void
+	setHistoryOfDialog: (
+		updater: ChatMessage[] | ((prev: ChatMessage[]) => ChatMessage[])
+	) => void
 }
 
 export interface Store extends IInitialState, IActions {}

@@ -16,6 +16,7 @@ export const fetchData = async (
 			},
 			{
 				headers: headers,
+				responseType: 'json',
 			}
 		)
 

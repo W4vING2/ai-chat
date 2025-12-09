@@ -2,7 +2,7 @@
 
 import { useMessageStore } from '@/src/store/messagesStore'
 import type { ChatMessage } from '@/src/types/chatMessage.types'
-import { Data } from '@/src/types/promptBar.types'
+import type { Data } from '@/src/types/promptBar.types'
 import { fetchData } from '@/src/utils/fetchData'
 import Image from 'next/image'
 import { memo } from 'react'
@@ -20,6 +20,60 @@ function PromptBar() {
 		setIsFirstSend,
 		isFirstSend,
 	} = useMessageStore()
+
+	const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+		const file = e.target.files?.[0]
+		if (!file) return
+
+		setIsFirstSend(true)
+		setIsLoading(true)
+
+		const base64 = await fileToBase64(file)
+
+		const userMessage: ChatMessage = {
+			role: 'user',
+			key: crypto.randomUUID(),
+			content: [
+				{ type: 'text', text: 'Вот изображение' },
+				{ type: 'image_url', image_url: base64 },
+			],
+		}
+
+		const newHistory = [...historyOfDialog, userMessage]
+		setHistoryOfDialog(newHistory)
+
+		addMessage({
+			text: '[ФОТО ОТПРАВЛЕНО]',
+			sender: 'user',
+			key: crypto.randomUUID(),
+		})
+
+		const response = await fetchData(model, newHistory)
+
+		setHistoryOfDialog(prev => [
+			...prev,
+			{ role: 'assistant', content: response, key: crypto.randomUUID() },
+		])
+
+		addMessage({
+			text: response,
+			sender: 'assistant',
+			key: crypto.randomUUID(),
+		})
+
+		setIsLoading(false)
+	}
+
+	const fileToBase64 = (file: File) =>
+		new Promise<string>((resolve, reject) => {
+			const reader = new FileReader()
+			reader.onload = () => {
+				const base64 = reader.result as string
+				resolve(base64)
+			}
+			reader.onerror = reject
+			reader.readAsDataURL(file)
+		})
 
 	const onSubmit = async (data: Data) => {
 		setIsFirstSend(true)
@@ -88,6 +142,20 @@ function PromptBar() {
 					/>
 				)}
 			</button>
+			<input
+				type='file'
+				accept='image/*'
+				onChange={handleImageUpload}
+				className='hidden'
+				id='uploadImage'
+			/>
+
+			<label
+				htmlFor='uploadImage'
+				className='cursor-pointer px-3 py-2 bg-white/10 rounded-lg'
+			>
+				📷
+			</label>
 		</form>
 	)
 }
