@@ -125,18 +125,28 @@ function PromptBar() {
 					placeholder='Напишите промпт…'
 					{...register('prompt')}
 				/>
-				<button className='px-4 py-2 rounded-xl bg-linear-to-br from-purple-400 to-blue-400 text-[#041118] font-bold hover:opacity-90 transition-opacity hover:outline-white/20 flex items-center justify-center outline-white'>
-					{isLoading ? (
-						<span className='text-[12px] text-white'>Loading...</span>
-					) : (
-						<Image
-							alt='submit button'
-							src='/arrowright.svg'
-							width={15}
-							height={15}
-						/>
-					)}
-				</button>
+				<div className='flex gap-2 items-stretch'>
+					<button className='px-4 py-2 rounded-xl bg-linear-to-br from-purple-400 to-blue-400 text-[#041118] font-bold hover:opacity-90 transition-opacity flex items-center justify-center'>
+						{isLoading ? (
+							<span className='text-[12px] text-white'>Loading...</span>
+						) : (
+							<Image
+								alt='submit button'
+								src='/arrowright.svg'
+								width={15}
+								height={15}
+							/>
+						)}
+					</button>
+
+					<label
+						htmlFor='uploadImage'
+						className='cursor-pointer px-4 py-2 bg-white/10 rounded-xl flex items-center justify-center'
+					>
+						📷
+					</label>
+				</div>
+
 				<input
 					type='file'
 					accept='image/*'
@@ -144,13 +154,6 @@ function PromptBar() {
 					className='hidden'
 					id='uploadImage'
 				/>
-
-				<label
-					htmlFor='uploadImage'
-					className='cursor-pointer px-3 py-2 bg-white/10 rounded-lg'
-				>
-					📷
-				</label>
 			</form>
 		</>
 	)

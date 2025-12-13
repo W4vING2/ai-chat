@@ -3,10 +3,9 @@
 import { models } from '@/src/config/models'
 import { useMessageStore } from '@/src/store/messagesStore'
 import { memo, useState } from 'react'
-import Logo from './ui/Logo'
 import Model from './ui/Model'
 
-function DesktopSidebar() {
+const DesktopSidebar: React.FC = () => {
 	const [activeTab, setActiveTab] = useState<'models' | 'chats'>('models')
 	const [activeModel, setActiveModel] = useState(0)
 
@@ -19,30 +18,46 @@ function DesktopSidebar() {
 		clearMessages()
 	}
 
+	const sidebarStyle: React.CSSProperties = {
+		width: '260px',
+		background: 'rgba(11,14,19,1)',
+		padding: '20px',
+		borderRight: '1px solid rgba(255,255,255,0.08)',
+		flexDirection: 'column',
+		gap: '20px',
+		borderRadius: '18px',
+	}
+
+	const buttonStyle = (active: boolean): React.CSSProperties => ({
+		padding: '10px 12px',
+		borderRadius: '10px',
+		background: active ? 'rgba(124,124,255,0.15)' : 'transparent',
+		color: active ? '#7c7cff' : '#9aa4b2',
+		border: active ? '1px solid rgba(255,255,255,0.08)' : 'none',
+		cursor: 'pointer',
+		transition: 'background 0.2s, color 0.2s',
+		fontSize: '14px',
+		fontWeight: 500,
+	})
+
 	return (
-		<aside
-			className='glass hidden md:flex flex-col gap-6 bg-white/6
-			backdrop-blur-lg border border-white/12 rounded-2xl p-5 w-[260px] h-full'
-		>
-			<div className='flex justify-around mb-4'>
+		<aside style={sidebarStyle} className='hidden lg:flex'>
+			<div
+				style={{
+					display: 'flex',
+					justifyContent: 'space-around',
+					marginBottom: '16px',
+				}}
+			>
 				<button
 					onClick={() => setActiveTab('models')}
-					className={`px-4 py-2 rounded-lg transition ${
-						activeTab === 'models'
-							? 'bg-white/20 border border-white/30'
-							: 'opacity-60'
-					}`}
+					style={buttonStyle(activeTab === 'models')}
 				>
 					Модели
 				</button>
-
 				<button
 					onClick={() => setActiveTab('chats')}
-					className={`px-4 py-2 rounded-lg transition ${
-						activeTab === 'chats'
-							? 'bg-white/20 border border-white/30'
-							: 'opacity-60'
-					}`}
+					style={buttonStyle(activeTab === 'chats')}
 				>
 					Чаты
 				</button>
@@ -50,8 +65,14 @@ function DesktopSidebar() {
 
 			{activeTab === 'models' && (
 				<div>
-					<Logo text='выбор модели' />
-					<div className='flex flex-col gap-2 mt-4'>
+					<div
+						style={{
+							display: 'flex',
+							flexDirection: 'column',
+							gap: '8px',
+							marginTop: '8px',
+						}}
+					>
 						{models.map((model, idx) => (
 							<Model
 								key={idx}
@@ -66,11 +87,19 @@ function DesktopSidebar() {
 			)}
 
 			{activeTab === 'chats' && (
-				<div className='flex flex-col'>
-					<Logo text='история чатов' />
+				<div style={{ display: 'flex', flexDirection: 'column' }}>
 					<button
-						className='border border-white/50 rounded-md p-2 mt-4 w-full'
 						onClick={reset}
+						style={{
+							border: '1px solid rgba(255,255,255,0.5)',
+							borderRadius: '8px',
+							padding: '8px',
+							marginTop: '16px',
+							width: '100%',
+							cursor: 'pointer',
+							background: 'transparent',
+							color: '#e6eaf0',
+						}}
 					>
 						New Chat
 					</button>

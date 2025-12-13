@@ -2,7 +2,6 @@
 
 import { memo } from 'react'
 import { useMessageStore } from '../store/messagesStore'
-import Logo from './ui/Logo'
 
 function ChatsSide() {
 	const {
@@ -27,9 +26,6 @@ function ChatsSide() {
 				right: isChatHistoryOpen ? '0' : '-300px',
 			}}
 		>
-			<div className='flex items-center gap-3 mb-6'>
-				<Logo text='история чатов' />
-			</div>
 			<div className='flex justify-center w-full mt-5'>
 				<button
 					className='border border-white/50 rounded-md p-2'

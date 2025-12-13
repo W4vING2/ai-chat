@@ -3,7 +3,6 @@
 import { models } from '@/src/config/models'
 import { useMessageStore } from '@/src/store/messagesStore'
 import { memo, useState } from 'react'
-import Logo from './ui/Logo'
 import Model from './ui/Model'
 
 function BurgerSide() {
@@ -17,9 +16,6 @@ function BurgerSide() {
 				left: isBurgerOpen ? '0' : '-300px',
 			}}
 		>
-			<div className='flex items-center gap-3 mb-6'>
-				<Logo text='выбор модели' />
-			</div>
 			<div className='flex flex-col gap-2'>
 				{models.map((model, idx) => (
 					<Model
